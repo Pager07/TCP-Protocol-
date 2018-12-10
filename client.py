@@ -64,7 +64,14 @@ port = 1234
 socket_address = (ip ,port)
     
 '''Connect to the server'''
-client_socket.connect(socket_address)
+try:
+    client_socket.connect(socket_address)
+except socket.gaierror ,e:
+    print("Incorrrect IP address")
+    sys.exit(1)
+except socket.error:
+    print("Connection error, Something wrong with port")
+    sys.exit(1)
 
 #'''Check for connection stauts and tell user'''
 tell_connection_status(client_socket)
